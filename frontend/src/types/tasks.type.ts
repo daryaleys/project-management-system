@@ -1,17 +1,17 @@
 export type TaskPriority = "Low" | "Medium" | "High";
 export type TaskStatus = "InProgress" | "Done" | "Backlog";
 
-export enum TaskPriorityEnum {
-	Low = "Низкий",
-	Medium = "Средний",
-	High = "Высокий",
-}
+export const PRIORITY = {
+	Low: "Низкий",
+	Medium: "Средний",
+	High: "Высокий",
+} as const;
 
-export enum TaskStatusEnum {
-	Backlog = "В бэклоге",
-	InProgress = "В работе",
-	Done = "Готово",
-}
+export const STATUS = {
+	Backlog: "В бэклоге",
+	InProgress: "В работе",
+	Done: "Готово",
+} as const;
 
 export type Task = {
 	assignee: {
@@ -30,9 +30,22 @@ export type Task = {
 	title: string;
 };
 
-export type TaskFilter = {
+export type TaskFilters = {
 	title: string;
 	assignee: string;
 	status: TaskStatus | "";
 	boardId: string;
+};
+
+export type TaskFormData = {
+	title: string;
+	description: string;
+	boardId: number | "";
+	priority: TaskPriority | "";
+	status: TaskStatus | "";
+	assigneeId: number | "";
+};
+
+export type TaskStatusData = {
+	status: TaskStatus | "";
 };

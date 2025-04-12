@@ -1,13 +1,16 @@
 import { useParams } from "react-router";
-import { useMemo } from "react";
-import { Task } from "../types/tasks.type";
-import BoardTasks from "../components/board-issues/BoardTasks";
+import { useContext, useMemo } from "react";
+import { Task, TaskFormData } from "../types/tasks.type";
+import BoardTasks from "../components/board-tasks/BoardTasks";
 import { useBoardTasks } from "../api/api-boards";
 import { BoardTasksList } from "../types/boards.type";
+import { ModalContext } from "../context/ModalContext";
+import TaskForm from "../components/task-form/TaskForm";
 
 function BoardPage() {
 	const { id } = useParams<{ id: string }>();
-	const { data: tasks, isLoading, error } = useBoardTasks(Number(id));
+	const { data: tasks, isLoading, error, refetch } = useBoardTasks(Number(id));
+	const { openModal } = useContext(ModalContext);
 
 	const boardTasks: BoardTasksList = useMemo(() => {
 		return {
@@ -17,11 +20,16 @@ function BoardPage() {
 		};
 	}, [tasks]);
 
-	if (isLoading) return <div>Loading...</div>;
-	if (error) return <div>Error: {error.message}</div>;
+	const openTask = (task: Task) => {
+		const initialData: TaskFormData = { ...task, boardId: Number(id), assigneeId: task.assignee.id };
+		openModal(<TaskForm taskId={task.id} initialData={initialData} onSuccess={() => refetch()} />);
+	};
+
+	if (isLoading) return <div>Загрузка...</div>;
+	if (error) return <div>Что-то пошло не так</div>;
 	return (
 		<>
-			<BoardTasks tasks={boardTasks} />
+			<BoardTasks tasks={boardTasks} openTask={openTask} />
 		</>
 	);
 }

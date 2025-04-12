@@ -1,40 +1,31 @@
-import { useMemo, useState } from "react";
-import { TaskFilter, TaskStatusEnum, Task } from "../types/tasks.type";
+import { useContext, useMemo, useState } from "react";
+import { TaskFilters, Task, TaskFormData } from "../types/tasks.type";
 import TaskList from "../components/task-list/TaskList";
 import Button from "../components/ui/button/Button";
-import Filter from "../components/filter/Filter";
-import { Board } from "../types/boards.type";
+import Filter from "../components/task-filter/TaskFilter";
 import { useTasks } from "../api/api-tasks";
-import { useBoards } from "../api/api-boards";
+import useDebounce from "../hooks/useDebounce";
+import { ModalContext } from "../context/ModalContext";
+import TaskForm from "../components/task-form/TaskForm";
 
 function TasksPage() {
-	const { data: tasks, isLoading: tasksLoading, error: tasksError } = useTasks();
-	const { data: boards, isLoading: boardsLoading, error: boardsError } = useBoards();
+	const { data: tasks, isLoading, error, refetch } = useTasks();
+	const { openModal } = useContext(ModalContext);
 
-	const [filter, setFilter] = useState<TaskFilter>({
+	const [filter, setFilter] = useState<TaskFilters>({
 		title: "",
 		assignee: "",
 		status: "",
 		boardId: "",
 	});
 
-	const statusOptions = useMemo(() => Object.entries(TaskStatusEnum).map(([value, name]) => ({ value, name })), []);
-	const boardOptions = useMemo(() => {
-		return (
-			boards?.map((board: Board) => ({
-				value: board.id,
-				name: board.name,
-			})) ?? []
-		);
-	}, [tasks]);
+	const debouncedTitleSearch = useDebounce(filter.title);
+	const debouncedAssigneeSearch = useDebounce(filter.assignee);
 
-	// const [title, setTitle] = useState<string>("");
-	// const [description, setDescription] = useState<string>("");
-
-	// const submitForm: MouseEventHandler<HTMLButtonElement> = (event) => {
-	// 	event.preventDefault();
-	// 	console.log(title, description);
-	// };
+	const openTask = (task: Task) => {
+		const initialData: TaskFormData = { ...task, assigneeId: task.assignee.id };
+		openModal(<TaskForm taskId={task.id} initialData={initialData} onSuccess={() => refetch()} />);
+	};
 
 	const filteredTasks = useMemo(() => {
 		return (
@@ -47,25 +38,15 @@ function TasksPage() {
 				return statusMatch && boardMatch && assigneeMatch && titleMatch;
 			}) ?? []
 		);
-	}, [filter.title, filter.assignee, filter.status, filter.boardId, tasks]);
+	}, [debouncedTitleSearch, debouncedAssigneeSearch, filter.status, filter.boardId, tasks]);
 
-	const createTask = () => {
-		console.log("tasks click");
-	};
-
-	if (tasksLoading || boardsLoading) return <div>Загрузка...</div>;
-	if (tasksError || boardsError) return <div>Что-то пошло не так</div>;
+	if (isLoading) return <div>Загрузка...</div>;
+	if (error) return <div>Что-то пошло не так</div>;
 	return (
 		<>
-			<Filter filter={filter} setFilter={setFilter} statusOptions={statusOptions} boardOptions={boardOptions} />
-
-			{/* <form>
-				<Input value={title} type="text" placeholder="Название" onChange={(e) => setTitle((e.target as HTMLInputElement).value)} />
-				<Input value={description} type="text" placeholder="Описание" onChange={(e) => setDescription((e.target as HTMLInputElement).value)} />
-				<Button onClick={submitForm}>Сабмит формы</Button>
-			</form> */}
-			<TaskList tasks={filteredTasks} />
-			<Button onClick={createTask}>Создать задачу</Button>
+			<Filter filters={filter} setFilters={setFilter} />
+			<TaskList tasks={filteredTasks} onClick={openTask} />
+			<Button onClick={() => openModal(<TaskForm onSuccess={() => refetch()} />)}>Создать задачу</Button>
 		</>
 	);
 }

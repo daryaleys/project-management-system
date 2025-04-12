@@ -1,21 +1,26 @@
 import classes from "./TaskItem.module.css";
-import { Task, TaskPriorityEnum, TaskStatusEnum } from "../../../types/tasks.type";
+import { PRIORITY, STATUS, Task } from "../../../types/tasks.type";
 
-function TaskItem({ title, description, status, boardName, assignee, priority }: Task) {
+interface TaskItemProps {
+	task: Task;
+	onClick(): void;
+}
+
+function TaskItem({ task, onClick }: TaskItemProps) {
 	return (
-		<div className={classes.task}>
+		<button onClick={onClick} className={classes.task}>
 			<div className={classes.taskInfo}>
-				<h3 className={classes.taskTitle}>{title}</h3>
-				<span className={classes.taskBoard}>{boardName}</span>
-				<span className={classes.taskDescription}>{description}</span>
-				<span>Исполнитель: {assignee.fullName}</span>
+				<h3 className={classes.taskTitle}>{task.title}</h3>
+				<span className={classes.taskBoard}>{task.boardName}</span>
+				<span className={classes.taskDescription}>{task.description}</span>
+				<span>Исполнитель: {task.assignee.fullName}</span>
 			</div>
 
 			<div className={classes.taskSide}>
-				<span>Статус: {TaskStatusEnum[status]}</span>
-				<span>Приоритет: {TaskPriorityEnum[priority]}</span>
+				<span>Статус: {STATUS[task.status]}</span>
+				<span>Приоритет: {PRIORITY[task.priority]}</span>
 			</div>
-		</div>
+		</button>
 	);
 }
 

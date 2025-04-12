@@ -7,7 +7,7 @@ import NotFound from "../pages/NotFoundPage";
 export const routes: RouteProps[] = [
 	{
 		path: "/",
-		element: <Navigate to="/boards" />,
+		element: <Navigate to="/tasks" />,
 	},
 	{
 		path: "/boards",

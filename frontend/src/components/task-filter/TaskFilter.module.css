@@ -20,3 +20,18 @@
 	flex-direction: column;
 	gap: 15px;
 }
+
+@media screen and (width <= 768px) {
+	.filter {
+		/* width: 100%; */
+		flex-direction: column;
+	}
+
+	.filterSearch {
+		width: 100%;
+	}
+
+	.filterSelect {
+		width: 100%;
+	}
+}

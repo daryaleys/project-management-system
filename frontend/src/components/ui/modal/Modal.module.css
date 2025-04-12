@@ -1,0 +1,17 @@
+.modal {
+	position: fixed;
+	inset: 0;
+	padding: 20px;
+	background: rgba(0, 0, 0, 0.8);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.modalContent {
+	max-width: 800px;
+	padding: 20px;
+	border-radius: 10px;
+	background: var(--background-color);
+	box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+}

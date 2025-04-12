@@ -1,10 +1,13 @@
 import { BrowserRouter } from "react-router";
 import AppRouter from "./router/AppRouter";
+import { ModalProvider } from "./context/ModalContext";
 
 function App() {
 	return (
 		<BrowserRouter>
-			<AppRouter />
+			<ModalProvider>
+				<AppRouter />
+			</ModalProvider>
 		</BrowserRouter>
 	);
 }
