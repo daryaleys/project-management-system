@@ -1,6 +1,6 @@
 import { NavLink } from "react-router";
 import classes from "./Header.module.css";
-import Button from "../ui/button/button";
+import Button from "../ui/button/Button";
 
 function Header() {
 	const createTask = () => {
@@ -14,7 +14,7 @@ function Header() {
 					<NavLink to="/issues" end className={({ isActive }) => (isActive ? classes.headerLink_active : classes.headerLink)}>
 						Все задачи
 					</NavLink>
-					<NavLink to="/boards" end className={({ isActive }) => (isActive ? classes.headerLink_active : classes.headerLink)}>
+					<NavLink to="/boards" className={({ isActive }) => (isActive ? classes.headerLink_active : classes.headerLink)}>
 						Проекты
 					</NavLink>
 				</nav>

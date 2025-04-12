@@ -19,16 +19,14 @@
 }
 
 .headerLink {
-	color: #d0ccc1;
 	font-weight: 600;
-	transition: color 0.2s ease-in-out;
-
-	&:hover {
-		color: #fff;
-	}
 }
 
 .headerLink_active {
 	color: var(--main-color);
 	font-weight: 600;
+
+	&:hover {
+		color: var(--main-color);
+	}
 }

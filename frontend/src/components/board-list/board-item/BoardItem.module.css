@@ -1,0 +1,25 @@
+.board {
+	padding: 20px 30px;
+	border: 1px solid var(--main-color);
+	border-radius: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 50px;
+}
+
+.boardInfo {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.boardName {
+	font-size: 26px;
+	font-weight: 600;
+}
+
+.boardDescription {
+	font-size: 16px;
+	color: var(--second-text-color);
+}

@@ -6,7 +6,7 @@ import Button from "../components/ui/button/Button";
 import Filter from "../components/filter/Filter";
 import { issueStatus } from "../consts/issue-consts";
 import { getBoards } from "../api/boards-api";
-import { Board } from "../types/boards-type";
+import { Board } from "../types/board-type";
 
 function Issues() {
 	const [issues, setIssues] = useState<Issue[]>([]);

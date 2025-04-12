@@ -1,5 +1,10 @@
-.issues {
+.issues,
+.issuesList {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
+}
+
+.issuesCount {
+	color: var(--second-text-color);
 }

@@ -3,7 +3,11 @@
 	font-size: 18px;
 	border-radius: 10px;
 	background: transparent;
-	color: #fff;
+	color: var(--text-color);
 	border: 1px solid var(--main-color);
 	outline: none;
+
+	&::placeholder {
+		color: var(--second-text-color);
+	}
 }
