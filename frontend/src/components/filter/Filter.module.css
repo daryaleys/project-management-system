@@ -1,0 +1,22 @@
+.filter {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 40px;
+	margin-bottom: 30px;
+}
+
+.filterSearch {
+	display: flex;
+	align-items: flex-start;
+	flex-direction: column;
+	gap: 15px;
+}
+
+.filterSelect {
+	display: flex;
+	align-items: flex-end;
+	justify-content: stretch;
+	flex-direction: column;
+	gap: 15px;
+}

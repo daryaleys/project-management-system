@@ -1,0 +1,34 @@
+.header {
+	box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.headerContainer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	max-width: 1700px;
+	margin: 0 auto;
+	padding: 30px;
+}
+
+.headerNav {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+	font-size: 20px;
+}
+
+.headerLink {
+	color: #d0ccc1;
+	font-weight: 600;
+	transition: color 0.2s ease-in-out;
+
+	&:hover {
+		color: #fff;
+	}
+}
+
+.headerLink_active {
+	color: var(--main-color);
+	font-weight: 600;
+}

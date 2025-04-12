@@ -1,0 +1,19 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	scroll-behavior: smooth;
+	-webkit-tap-highlight-color: transparent;
+}
+
+body {
+	background-color: #212121;
+	color: #fff;
+	--main-color: #4d6bfe;
+}
+
+a {
+	text-decoration: none;
+}

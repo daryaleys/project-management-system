@@ -1,0 +1,13 @@
+.select {
+	padding: 10px;
+	font-size: 18px;
+	border-radius: 10px;
+	background: transparent;
+	color: #fff;
+	border: 1px solid var(--main-color);
+	outline: none;
+
+	& > option {
+		color: #000;
+	}
+}

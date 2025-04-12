@@ -1,8 +1,11 @@
+import { BrowserRouter } from "react-router";
+import AppRouter from "./router/AppRouter";
+
 function App() {
 	return (
-		<>
-			<h1>Система управления проектами</h1>
-		</>
+		<BrowserRouter>
+			<AppRouter />
+		</BrowserRouter>
 	);
 }
 

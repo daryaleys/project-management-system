@@ -1,0 +1,49 @@
+.issue {
+	padding: 20px 30px;
+	border: 1px solid var(--main-color);
+	border-radius: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 50px;
+}
+
+.issueInfo {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.issueTitle {
+	font-size: 26px;
+	font-weight: 700;
+}
+
+.issueBoard {
+	font-size: 14px;
+	color: rgba(255, 255, 255, 0.8);
+}
+
+.issueDescription {
+	font-size: 20px;
+}
+
+.issueSide {
+	flex-shrink: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 10px;
+}
+
+@media screen and (width <= 768px) {
+	.issue {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 15px;
+	}
+
+	.issueSide {
+		align-items: flex-start;
+	}
+}
