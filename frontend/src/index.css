@@ -7,6 +7,7 @@
 	--main-color: #4d6bfe;
 	--text-color: #fff;
 	--second-text-color: rgba(255, 255, 255, 0.8);
+	--color-done: #29c87c;
 }
 
 body {
@@ -22,4 +23,12 @@ a {
 	&:hover {
 		color: var(--text-color);
 	}
+}
+
+button {
+	border: none;
+	outline: none;
+	background: transparent;
+	cursor: pointer;
+	color: var(--text-color);
 }

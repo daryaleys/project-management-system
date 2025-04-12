@@ -1,6 +1,5 @@
 import classes from "./IssueItem.module.css";
-import { Issue } from "../../../types/issue-type";
-import { issuePriorities, issueStatus } from "../../../consts/issue-consts";
+import { Issue, IssuePriorityEnum, IssueStatusEnum } from "../../../types/issue-type";
 
 function IssueItem({ title, description, status, boardName, assignee, priority }: Issue) {
 	return (
@@ -9,12 +8,12 @@ function IssueItem({ title, description, status, boardName, assignee, priority }
 				<h3 className={classes.issueTitle}>{title}</h3>
 				<span className={classes.issueBoard}>{boardName}</span>
 				<span className={classes.issueDescription}>{description}</span>
-				<span>{assignee.fullName}</span>
+				<span>Исполнитель: {assignee.fullName}</span>
 			</div>
 
 			<div className={classes.issueSide}>
-				<div>Статус: {issueStatus[status]}</div>
-				<span>Приоритет: {issuePriorities[priority]}</span>
+				<span>Статус: {IssueStatusEnum[status]}</span>
+				<span>Приоритет: {IssuePriorityEnum[priority]}</span>
 			</div>
 		</div>
 	);

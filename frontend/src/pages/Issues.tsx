@@ -1,10 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { getIssues } from "../api/issues-api";
-import { Issue, IssueFilter } from "../types/issue-type";
+import { Issue, IssueFilter, IssueStatusEnum } from "../types/issue-type";
 import IssueList from "../components/issue-list/IssueList";
 import Button from "../components/ui/button/Button";
 import Filter from "../components/filter/Filter";
-import { issueStatus } from "../consts/issue-consts";
 import { getBoards } from "../api/boards-api";
 import { Board } from "../types/board-type";
 
@@ -20,10 +19,7 @@ function Issues() {
 		boardId: "",
 	});
 
-	const statusOptions = Object.entries(issueStatus).map(([value, name]) => ({
-		value,
-		name,
-	}));
+	const statusOptions = Object.entries(IssueStatusEnum).map(([value, name]) => ({ value, name }));
 
 	// const [title, setTitle] = useState<string>("");
 	// const [description, setDescription] = useState<string>("");
@@ -36,6 +32,7 @@ function Issues() {
 	const fetchIssues = async () => {
 		const data = await getIssues();
 		setIssues(data);
+		console.log(data);
 	};
 
 	const fetchBoards = async () => {

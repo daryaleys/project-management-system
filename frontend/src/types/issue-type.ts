@@ -24,3 +24,15 @@ export type IssueFilter = {
 	status: IssueStatus | "";
 	boardId: string;
 };
+
+export enum IssuePriorityEnum {
+	Low = "Низкий",
+	Medium = "Средний",
+	High = "Высокий",
+}
+
+export enum IssueStatusEnum {
+	Backlog = "В бэклоге",
+	InProgress = "В работе",
+	Done = "Готово",
+}
