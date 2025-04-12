@@ -1,8 +1,8 @@
 import { Navigate, RouteProps } from "react-router";
-import Boards from "../pages/Boards";
-import Issues from "../pages/Issues";
-import Board from "../pages/Board";
-import NotFound from "../pages/NotFound";
+import BoardsPage from "../pages/BoardsPage";
+import TasksPage from "../pages/TasksPage";
+import BoardPage from "../pages/BoardPage";
+import NotFound from "../pages/NotFoundPage";
 
 export const routes: RouteProps[] = [
 	{
@@ -11,15 +11,15 @@ export const routes: RouteProps[] = [
 	},
 	{
 		path: "/boards",
-		element: <Boards />,
+		element: <BoardsPage />,
 	},
 	{
 		path: "/boards/:id",
-		element: <Board />,
+		element: <BoardPage />,
 	},
 	{
-		path: "/issues",
-		element: <Issues />,
+		path: "/tasks",
+		element: <TasksPage />,
 	},
 	{
 		path: "*",

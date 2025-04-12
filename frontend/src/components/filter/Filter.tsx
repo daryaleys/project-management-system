@@ -1,26 +1,32 @@
-import { Dispatch, SetStateAction } from "react";
-import { IssueFilter, IssueStatus } from "../../types/issue-type";
-import Input from "../ui/input/Input";
-import Select from "../ui/select/Select";
 import classes from "./Filter.module.css";
+import { TaskFilter } from "../../types/tasks.type";
+import Input from "../ui/input/Input";
+import Select, { SelectOptions } from "../ui/select/Select";
 
 interface FilterProps {
-	filter: IssueFilter;
-	setFilter: Dispatch<SetStateAction<IssueFilter>>;
-	statusOptions: { value: string; name: string }[];
-	boardOptions: { value: string; name: string }[];
+	filter: TaskFilter;
+	setFilter: (filter: TaskFilter) => void;
+	statusOptions: SelectOptions[];
+	boardOptions: SelectOptions[];
 }
 
 function Filter({ filter, setFilter, statusOptions, boardOptions }: FilterProps) {
+	const handleChange = (field: keyof TaskFilter, value: string) => {
+		setFilter({
+			...filter,
+			[field]: value,
+		});
+	};
+
 	return (
 		<div className={classes.filter}>
 			<div className={classes.filterSearch}>
-				<Input value={filter.title} type="text" placeholder="Название задачи" onChange={(e) => setFilter({ ...filter, title: (e.target as HTMLInputElement).value })} />
-				<Input value={filter.assignee} type="text" placeholder="Исполнитель" onChange={(e) => setFilter({ ...filter, assignee: (e.target as HTMLInputElement).value })} />
+				<Input value={filter.title} type="text" placeholder="Название задачи" onInputChange={(value) => handleChange("title", value)} />
+				<Input value={filter.assignee} type="text" placeholder="Исполнитель" onInputChange={(value) => handleChange("assignee", value)} />
 			</div>
 			<div className={classes.filterSelect}>
-				<Select defaultValue="Статус" options={statusOptions} value={filter.status} handleChange={(status: IssueStatus | "") => setFilter({ ...filter, status: status })} />
-				<Select defaultValue="Доска" options={boardOptions} value={filter.boardId} handleChange={(boardId) => setFilter({ ...filter, boardId: boardId })} />
+				<Select defaultValue="Статус" options={statusOptions} value={filter.status} onChange={(value) => handleChange("status", value)} />
+				<Select defaultValue="Доска" options={boardOptions} value={filter.boardId} onChange={(value) => handleChange("boardId", value)} />
 			</div>
 		</div>
 	);

@@ -1,4 +1,4 @@
-.issue {
+.task {
 	padding: 20px 15px;
 	display: flex;
 	flex-direction: column;
@@ -8,13 +8,13 @@
 	border: 1px solid var(--main-color);
 }
 
-.issueTitle {
+.taskTitle {
 	font-size: 20px;
 	font-weight: 600;
 	text-align: left;
 }
 
-.issueDescription {
+.taskDescription {
 	font-size: 16px;
 	text-align: left;
 }

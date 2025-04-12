@@ -1,4 +1,4 @@
-.issue {
+.task {
 	padding: 20px 30px;
 	border: 1px solid var(--main-color);
 	border-radius: 10px;
@@ -8,27 +8,27 @@
 	gap: 50px;
 }
 
-.issueInfo {
+.taskInfo {
 	display: flex;
 	flex-direction: column;
 	gap: 8px;
 }
 
-.issueTitle {
+.taskTitle {
 	font-size: 26px;
 	font-weight: 700;
 }
 
-.issueBoard {
+.taskBoard {
 	font-size: 14px;
 	color: var(--second-text-color);
 }
 
-.issueDescription {
+.taskDescription {
 	font-size: 20px;
 }
 
-.issueSide {
+.taskSide {
 	flex-shrink: 0;
 	display: flex;
 	flex-direction: column;
@@ -37,13 +37,13 @@
 }
 
 @media screen and (width <= 768px) {
-	.issue {
+	.task {
 		flex-direction: column;
 		align-items: flex-start;
 		gap: 15px;
 	}
 
-	.issueSide {
+	.taskSide {
 		align-items: flex-start;
 	}
 }

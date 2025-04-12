@@ -11,7 +11,7 @@ function Header() {
 		<header className={classes.header}>
 			<div className={classes.headerContainer}>
 				<nav className={classes.headerNav}>
-					<NavLink to="/issues" end className={({ isActive }) => (isActive ? classes.headerLink_active : classes.headerLink)}>
+					<NavLink to="/tasks" end className={({ isActive }) => (isActive ? classes.headerLink_active : classes.headerLink)}>
 						Все задачи
 					</NavLink>
 					<NavLink to="/boards" className={({ isActive }) => (isActive ? classes.headerLink_active : classes.headerLink)}>

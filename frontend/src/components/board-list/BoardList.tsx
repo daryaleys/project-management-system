@@ -1,5 +1,5 @@
 import classes from "./BoardList.module.css";
-import { Board } from "../../types/board-type";
+import { Board } from "../../types/boards.type";
 import BoardItem from "./board-item/BoardItem";
 
 function BoardList({ boards }: { boards: Board[] }) {

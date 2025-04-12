@@ -1,15 +1,20 @@
 import classes from "./Select.module.css";
 
-interface SelectProps {
-	options: { value: string; name: string }[];
-	defaultValue: string;
+export interface SelectOptions {
 	value: string;
-	handleChange(value: string): void;
+	name: string;
 }
 
-function Select({ options, defaultValue, value, handleChange }: SelectProps) {
+interface SelectProps {
+	options: SelectOptions[];
+	defaultValue: string;
+	value: string;
+	onChange(value: string): void;
+}
+
+function Select({ options, defaultValue, value, onChange }: SelectProps) {
 	return (
-		<select className={classes.select} value={value} onChange={(e) => handleChange(e.target.value)}>
+		<select className={classes.select} value={value} onChange={(e) => onChange(e.target.value)}>
 			<option value="">{defaultValue}</option>
 			{options.map((option) => (
 				<option value={option.value} key={option.value}>

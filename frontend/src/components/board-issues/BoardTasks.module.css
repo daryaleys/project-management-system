@@ -1,10 +1,10 @@
-.issuesGrid {
+.tasksGrid {
 	display: flex;
 	justify-content: space-between;
 	gap: 20px;
 }
 
-.issuesColumn {
+.tasksColumn {
 	flex-basis: 25%;
 	flex-shrink: 0;
 	flex-grow: 1;
@@ -18,4 +18,10 @@
 	font-weight: 600;
 	color: var(--main-color);
 	text-align: center;
+}
+
+.tasksEmpty {
+	font-size: 18px;
+	text-align: center;
+	color: var(--second-text-color);
 }

@@ -1,5 +1,5 @@
 import { NavLink } from "react-router";
-import { Board } from "../../../types/board-type";
+import { Board } from "../../../types/boards.type";
 import classes from "./BoardItem.module.css";
 
 function BoardItem({ name, description, id }: Board) {
