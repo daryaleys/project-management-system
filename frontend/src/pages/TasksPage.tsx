@@ -46,7 +46,11 @@ function TasksPage() {
 		<>
 			<Filter filters={filter} setFilters={setFilter} />
 			<TaskList tasks={filteredTasks} onClick={openTask} />
-			<Button onClick={() => openModal(<TaskForm onSuccess={() => refetch()} />)}>Создать задачу</Button>
+			<div>
+				<Button style={{ display: "block", marginTop: "15px", marginLeft: "auto" }} onClick={() => openModal(<TaskForm onSuccess={() => refetch()} />)}>
+					Создать задачу
+				</Button>
+			</div>
 		</>
 	);
 }
