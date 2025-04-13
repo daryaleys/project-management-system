@@ -3,3 +3,9 @@
 	flex-direction: column;
 	gap: 20px;
 }
+
+@media screen and (width <= 768px) {
+	.boards {
+		gap: 15px;
+	}
+}

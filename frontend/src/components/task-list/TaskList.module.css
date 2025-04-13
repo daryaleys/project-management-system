@@ -8,3 +8,12 @@
 .tasksCount {
 	color: var(--second-text-color);
 }
+
+@media screen and (width <= 768px) {
+	.tasks,
+	.tasksList {
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+	}
+}

@@ -27,8 +27,8 @@ function TaskFilter({ filters, setFilters }: FilterProps) {
 				<Input value={filters.assignee} type="text" placeholder="Исполнитель" onChange={(e) => handleChange("assignee", e.target.value)} />
 			</div>
 			<div className={classes.filterSelect}>
-				<Select defaultValue="Статус" options={statusOptions} value={filters.status} onChange={(value) => handleChange("status", value)} />
-				<Select defaultValue="Доска" options={boardOptions} value={filters.boardId} onChange={(value) => handleChange("boardId", value)} />
+				<Select defaultValue="Статус" options={statusOptions} value={filters.status} onValueChange={(value) => handleChange("status", value)} />
+				<Select defaultValue="Доска" options={boardOptions} value={filters.boardId} onValueChange={(value) => handleChange("boardId", value)} />
 			</div>
 		</div>
 	);

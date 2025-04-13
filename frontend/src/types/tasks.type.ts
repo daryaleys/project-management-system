@@ -46,6 +46,15 @@ export type TaskFormData = {
 	assigneeId: number | "";
 };
 
+export type TaskFormErrors = {
+	title: string;
+	description: string;
+	boardId: string;
+	priority: string;
+	status: string;
+	assigneeId: string;
+};
+
 export type TaskStatusData = {
 	status: TaskStatus | "";
 };

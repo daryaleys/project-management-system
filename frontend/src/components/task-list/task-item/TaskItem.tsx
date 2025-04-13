@@ -8,7 +8,7 @@ interface TaskItemProps {
 
 function TaskItem({ task, onClick }: TaskItemProps) {
 	return (
-		<button onClick={onClick} className={classes.task}>
+		<button onClick={onClick} className={`${classes.task} ${task.priority}`}>
 			<div className={classes.taskInfo}>
 				<h3 className={classes.taskTitle}>{task.title}</h3>
 				<span className={classes.taskBoard}>{task.boardName}</span>
@@ -17,8 +17,12 @@ function TaskItem({ task, onClick }: TaskItemProps) {
 			</div>
 
 			<div className={classes.taskSide}>
-				<span>Статус: {STATUS[task.status]}</span>
-				<span>Приоритет: {PRIORITY[task.priority]}</span>
+				<div>
+					Статус: <span className={`${classes.taskStatus} ${task.status}`}>{STATUS[task.status]}</span>
+				</div>
+				<div>
+					Приоритет: <span className={`${classes.taskPriority} ${task.priority}`}>{PRIORITY[task.priority]}</span>
+				</div>
 			</div>
 		</button>
 	);

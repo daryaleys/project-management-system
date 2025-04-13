@@ -30,3 +30,16 @@
 		color: var(--main-color);
 	}
 }
+
+@media screen and (width <= 768px) {
+	.headerContainer {
+		padding: 20px 16px;
+	}
+
+	.headerNav {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 10px;
+		font-size: 18px;
+	}
+}

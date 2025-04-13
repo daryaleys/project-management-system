@@ -23,15 +23,18 @@
 
 @media screen and (width <= 768px) {
 	.filter {
-		/* width: 100%; */
 		flex-direction: column;
+		gap: 15px;
+		margin-bottom: 15px;
 	}
 
 	.filterSearch {
 		width: 100%;
+		align-items: stretch;
 	}
 
 	.filterSelect {
 		width: 100%;
+		align-items: stretch;
 	}
 }

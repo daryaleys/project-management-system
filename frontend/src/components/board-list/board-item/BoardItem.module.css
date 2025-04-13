@@ -23,3 +23,24 @@
 	font-size: 16px;
 	color: var(--second-text-color);
 }
+
+@media screen and (width <= 768px) {
+	.board {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 15px;
+		padding: 12px;
+	}
+
+	.boardInfo {
+		gap: 8px;
+	}
+
+	.boardName {
+		font-size: 18px;
+	}
+
+	.boardDescription {
+		font-size: 14px;
+	}
+}

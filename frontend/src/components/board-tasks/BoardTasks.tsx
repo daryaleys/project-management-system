@@ -6,7 +6,7 @@ import { BoardTasksList } from "../../types/boards.type";
 function BoardTasks({ tasks, openTask }: { tasks: BoardTasksList; openTask(task: Task): void }) {
 	return (
 		<>
-			<div className={classes.tasksGrid}>
+			<div className={classes.tasks}>
 				{Object.entries(tasks).map(([status, list]) => (
 					<div className={classes.tasksColumn} key={status}>
 						<h3 className={classes.columnTitle}>{STATUS[status]}</h3>

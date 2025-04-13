@@ -8,7 +8,6 @@
 	--main-color: #4d6bfe;
 	--text-color: #fff;
 	--second-text-color: rgba(255, 255, 255, 0.8);
-	--color-done: #29c87c;
 }
 
 body {
@@ -32,4 +31,28 @@ button {
 	background: transparent;
 	cursor: pointer;
 	color: var(--text-color);
+}
+
+.Backlog {
+	--color: #fe7f4d;
+}
+
+.InProgress {
+	--color: #fee94d;
+}
+
+.Done {
+	--color: #00c064;
+}
+
+.Low {
+	--color: #29c869;
+}
+
+.Medium {
+	--color: #feb74d;
+}
+
+.High {
+	--color: #c82929;
 }

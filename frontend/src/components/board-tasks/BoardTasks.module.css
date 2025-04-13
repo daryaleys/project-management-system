@@ -1,4 +1,4 @@
-.tasksGrid {
+.tasks {
 	display: flex;
 	justify-content: space-between;
 	gap: 20px;
@@ -16,7 +16,7 @@
 .columnTitle {
 	font-size: 26px;
 	font-weight: 600;
-	color: var(--main-color);
+	color: var(--text-color);
 	text-align: center;
 }
 
@@ -24,4 +24,23 @@
 	font-size: 18px;
 	text-align: center;
 	color: var(--second-text-color);
+}
+
+@media screen and (width <= 768px) {
+	.tasks {
+		flex-direction: column;
+		gap: 20px;
+	}
+
+	.tasksColumn {
+		gap: 15px;
+	}
+
+	.columnTitle {
+		font-size: 20px;
+	}
+
+	.tasksEmpty {
+		font-size: 14px;
+	}
 }

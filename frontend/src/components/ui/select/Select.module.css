@@ -11,3 +11,9 @@
 		color: #000;
 	}
 }
+
+@media screen and (width <= 768px) {
+	.select {
+		font-size: 16px;
+	}
+}

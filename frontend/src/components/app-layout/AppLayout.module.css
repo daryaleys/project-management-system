@@ -3,3 +3,9 @@
 	max-width: 1700px;
 	margin: 0 auto;
 }
+
+@media screen and (width <= 768px) {
+	.layout {
+		padding: 20px 16px;
+	}
+}

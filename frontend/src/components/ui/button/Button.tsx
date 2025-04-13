@@ -1,7 +1,7 @@
-import { MouseEventHandler } from "react";
+import { ButtonHTMLAttributes, MouseEventHandler } from "react";
 import classes from "./Button.module.css";
 
-interface ButtonProps {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	disabled?: boolean;
 	children: string;
 	onClick: MouseEventHandler<HTMLButtonElement>;

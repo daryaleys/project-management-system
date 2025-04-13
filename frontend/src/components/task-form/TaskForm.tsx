@@ -2,7 +2,7 @@ import { MouseEventHandler, useEffect, useState } from "react";
 import classes from "./TaskForm.module.css";
 import Input from "../ui/input/Input";
 import Button from "../ui/button/Button";
-import { TaskFormData } from "../../types/tasks.type";
+import { TaskFormData, TaskFormErrors } from "../../types/tasks.type";
 import Select from "../ui/select/Select";
 import { useBoardOptions, usePriorityOptions, useStatusOptions, useUserOptions } from "../../hooks/useSelectOptions";
 import Textarea from "../ui/textarea/Textarea";
@@ -15,11 +15,21 @@ interface TaskFormProps {
 	onSuccess(): void;
 }
 
+const getInitialFields = (): TaskFormData | TaskFormErrors => ({
+	title: "",
+	description: "",
+	priority: "",
+	status: "",
+	boardId: "",
+	assigneeId: "",
+});
+
 function TaskForm({ taskId, initialData, onSuccess }: TaskFormProps) {
 	const isTasksPage = useMatch("/tasks");
 	const isBoardDetailPage = useMatch("/boards/:id");
 	const navigate = useNavigate();
 
+	// Состояние формы
 	const [staticBoardId, setStaticBoardId] = useState(false);
 	const [showBoardButton, setShowBoardButton] = useState(false);
 	const [formData, setFormData] = useState<TaskFormData>({
@@ -30,21 +40,26 @@ function TaskForm({ taskId, initialData, onSuccess }: TaskFormProps) {
 		boardId: "",
 		assigneeId: "",
 	});
+	const [formErrors, setFormErrors] = useState(getInitialFields() as TaskFormErrors);
 
+	// Методы API
 	const { error: createError, isPending: createPending, isSuccess: createSuccess, mutate: createMutate } = useCreatingTask(onSuccess);
 	const { error: updateError, isPending: updatePending, isSuccess: updateSuccess, mutate: updateMutate } = useUpdatingTask(taskId!, onSuccess);
 
+	// Заполняем опции селектов
 	const statusOptions = useStatusOptions();
 	const priorityOptions = usePriorityOptions();
 	const boardOptions = useBoardOptions();
 	const userOptions = useUserOptions();
 
+	// Управляем состоянием формы в зависимости от начальных данных и текущей страницы
 	useEffect(() => {
 		if (initialData) setFormData(initialData);
 		if (isTasksPage && initialData) setShowBoardButton(true);
 		if (isBoardDetailPage && initialData) setStaticBoardId(true);
 	}, [initialData]);
 
+	// Заполняем объект formData при изменениях в полях
 	const handleChange = (field: keyof TaskFormData, value: number | string) => {
 		setFormData({
 			...formData,
@@ -52,15 +67,39 @@ function TaskForm({ taskId, initialData, onSuccess }: TaskFormProps) {
 		});
 	};
 
+	// Обработчик кнопки "Перейти к доске"
 	const goToBoard: MouseEventHandler<HTMLButtonElement> = (event) => {
 		event.preventDefault();
-		if (initialData?.boardId) navigate(`/boards/${initialData?.boardId}`);
-		setStaticBoardId(true);
-		setShowBoardButton(false);
+		if (initialData?.boardId) {
+			navigate(`/boards/${initialData?.boardId}`);
+			setStaticBoardId(true);
+			setShowBoardButton(false);
+		}
 	};
 
+	// Валидация
+	const validateForm = (): boolean => {
+		let isValid = true;
+		const newErrors = getInitialFields() as TaskFormErrors;
+
+		Object.entries(formData).forEach(([key, value]) => {
+			if (!value) {
+				newErrors[key as keyof TaskFormData] = "Поле обязательно для заполнения";
+				isValid = false;
+			}
+		});
+
+		setFormErrors(newErrors);
+		return isValid;
+	};
+
+	// Отправка формы
 	const submitForm: MouseEventHandler<HTMLButtonElement> = (event) => {
 		event.preventDefault();
+
+		setFormErrors(getInitialFields() as TaskFormErrors);
+		if (!validateForm()) return;
+
 		initialData ? updateMutate(formData) : createMutate(formData);
 	};
 
@@ -70,15 +109,27 @@ function TaskForm({ taskId, initialData, onSuccess }: TaskFormProps) {
 	return (
 		<form className={classes.form}>
 			<h3 className={classes.formTitle}>{initialData ? "Редактирование" : "Создание"} задачи</h3>
+
 			<Input value={formData.title} type="text" placeholder="Название" onChange={(e) => handleChange("title", e.target.value)} />
+			{formErrors.title && <span className={classes.formError}>{formErrors.title}</span>}
+
 			<Textarea value={formData.description} placeholder="Описание" onChange={(e) => handleChange("description", e.target.value)} />
-			<Select defaultValue="Проект" options={boardOptions} value={formData.boardId?.toString()} disabled={staticBoardId} onChange={(value) => handleChange("boardId", Number(value))} />
-			<Select defaultValue="Приоритет" options={priorityOptions} value={formData.priority} onChange={(value) => handleChange("priority", value)} />
-			<Select defaultValue="Статус" options={statusOptions} value={formData.status} onChange={(value) => handleChange("status", value)} />
-			<Select defaultValue="Исполнитель" options={userOptions} value={formData.assigneeId.toString()} onChange={(value) => handleChange("assigneeId", Number(value))} />
+			{formErrors.description && <span className={classes.formError}>{formErrors.description}</span>}
+
+			<Select defaultValue="Проект" options={boardOptions} value={formData.boardId?.toString()} disabled={staticBoardId} onValueChange={(value) => handleChange("boardId", Number(value))} />
+			{formErrors.boardId && <span className={classes.formError}>{formErrors.boardId}</span>}
+
+			<Select defaultValue="Приоритет" options={priorityOptions} value={formData.priority} onValueChange={(value) => handleChange("priority", value)} />
+			{formErrors.priority && <span className={classes.formError}>{formErrors.priority}</span>}
+
+			<Select defaultValue="Статус" options={statusOptions} value={formData.status} onValueChange={(value) => handleChange("status", value)} />
+			{formErrors.status && <span className={classes.formError}>{formErrors.status}</span>}
+
+			<Select defaultValue="Исполнитель" options={userOptions} value={formData.assigneeId.toString()} onValueChange={(value) => handleChange("assigneeId", Number(value))} />
+			{formErrors.assigneeId && <span className={classes.formError}>{formErrors.assigneeId}</span>}
 
 			<div className={classes.formActions}>
-				{showBoardButton && initialData && <Button onClick={goToBoard}>Перейти на доску</Button>}
+				{showBoardButton && <Button onClick={goToBoard}>Перейти на доску</Button>}
 				<Button onClick={submitForm}>{initialData ? "Обновить" : "Создать"}</Button>
 			</div>
 		</form>
